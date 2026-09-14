@@ -6,6 +6,8 @@ x64/
 .vscode/
 bin/
 build/
+/build-*/
+/root-config-*.log
 backup/
 lib/
 vsxmake2022/

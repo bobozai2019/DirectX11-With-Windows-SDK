@@ -145,7 +145,7 @@ void D3DApp::OnResize()
     HR(m_pSwapChain->ResizeBuffers(1, m_ClientWidth, m_ClientHeight, DXGI_FORMAT_R8G8B8A8_UNORM, 0));
     HR(m_pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(backBuffer.GetAddressOf())));
     HR(m_pd3dDevice->CreateRenderTargetView(backBuffer.Get(), nullptr, m_pRenderTargetView.GetAddressOf()));
-    
+
     // 设置调试对象名
     D3D11SetDebugObjectName(backBuffer.Get(), "BackBuffer[0]");
 
@@ -171,7 +171,7 @@ void D3DApp::OnResize()
         depthStencilDesc.SampleDesc.Count = 1;
         depthStencilDesc.SampleDesc.Quality = 0;
     }
-    
+
 
 
     depthStencilDesc.Usage = D3D11_USAGE_DEFAULT;
@@ -202,9 +202,9 @@ LRESULT D3DApp::MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
     switch (msg)
     {
-        // WM_ACTIVATE is sent when the window is activated or deactivated.  
-        // We pause the game when the window is deactivated and unpause it 
-        // when it becomes active.  
+        // WM_ACTIVATE is sent when the window is activated or deactivated.
+        // We pause the game when the window is deactivated and unpause it
+        // when it becomes active.
     case WM_ACTIVATE:
         if (LOWORD(wParam) == WA_INACTIVE)
         {
@@ -218,7 +218,7 @@ LRESULT D3DApp::MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
         }
         return 0;
 
-        // WM_SIZE is sent when the user resizes the window.  
+        // WM_SIZE is sent when the user resizes the window.
     case WM_SIZE:
         // Save the new client area dimensions.
         m_ClientWidth = LOWORD(lParam);
@@ -258,13 +258,13 @@ LRESULT D3DApp::MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                 }
                 else if (m_Resizing)
                 {
-                    // If user is dragging the resize bars, we do not resize 
-                    // the buffers here because as the user continuously 
+                    // If user is dragging the resize bars, we do not resize
+                    // the buffers here because as the user continuously
                     // drags the resize bars, a stream of WM_SIZE messages are
                     // sent to the window, and it would be pointless (and slow)
                     // to resize for each WM_SIZE message received from dragging
-                    // the resize bars.  So instead, we reset after the user is 
-                    // done resizing the window and releases the resize bars, which 
+                    // the resize bars.  So instead, we reset after the user is
+                    // done resizing the window and releases the resize bars, which
                     // sends a WM_EXITSIZEMOVE message.
                 }
                 else // API call such as SetWindowPos or m_pSwapChain->SetFullscreenState.
@@ -296,8 +296,8 @@ LRESULT D3DApp::MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
         PostQuitMessage(0);
         return 0;
 
-        // The WM_MENUCHAR message is sent when a menu is active and the user presses 
-        // a key that does not correspond to any mnemonic or accelerator key. 
+        // The WM_MENUCHAR message is sent when a menu is active and the user presses
+        // a key that does not correspond to any mnemonic or accelerator key.
     case WM_MENUCHAR:
         // Don't beep when we alt-enter.
         return MAKELRESULT(0, MNC_CLOSE);
@@ -323,10 +323,62 @@ LRESULT D3DApp::MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     return DefWindowProc(hwnd, msg, wParam, lParam);
 }
 
+bool D3DApp::InitMainWindow2()
+{
+    // 创建一个WNDCLASSEX结构体实例
+    WNDCLASSEX wc;
+    wc.cbSize = sizeof(WNDCLASSEX);
+    wc.style = CS_HREDRAW | CS_VREDRAW;
+    wc.lpfnWndProc = DefWindowProc;
+    wc.cbClsExtra = 0;
+    wc.cbWndExtra = 0;
+    wc.hInstance = GetModuleHandle(NULL);
+    wc.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+    wc.hCursor = LoadCursor(NULL, IDC_ARROW);
+    wc.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+    wc.lpszMenuName = NULL;
+    wc.lpszClassName = L"SampleWindowClass";
+    wc.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
+
+    // 注册窗口类
+    if (!RegisterClassEx(&wc)) {
+        MessageBox(NULL, L"Window Registration Failed!", L"Error", MB_ICONEXCLAMATION | MB_OK);
+        return 0;
+    }
+
+    // 创建窗口
+    HWND hwnd = CreateWindowEx(
+        WS_EX_CLIENTEDGE,
+        wc.lpszClassName,
+        L"Sample Window",
+        WS_OVERLAPPEDWINDOW,
+        CW_USEDEFAULT, CW_USEDEFAULT, 640, 480,
+        NULL, NULL, wc.hInstance, NULL);
+
+    if (hwnd == NULL) {
+        MessageBox(NULL, L"Window Creation Failed!", L"Error", MB_ICONEXCLAMATION | MB_OK);
+        return 0;
+    }
+
+    ShowWindow(hwnd, SW_SHOW);
+    UpdateWindow(hwnd);
+
+    // 消息循环
+    MSG Msg;
+    while (GetMessage(&Msg, NULL, 0, 0) > 0) {
+        TranslateMessage(&Msg);
+        DispatchMessage(&Msg);
+    }
+
+    return Msg.wParam;
+}
+
+
 
 bool D3DApp::InitMainWindow()
 {
-    WNDCLASS wc;
+
+    WNDCLASS wc = {0};
     wc.style = CS_HREDRAW | CS_VREDRAW;
     wc.lpfnWndProc = MainWndProc;
     wc.cbClsExtra = 0;
@@ -350,8 +402,19 @@ bool D3DApp::InitMainWindow()
     int width = R.right - R.left;
     int height = R.bottom - R.top;
 
-    m_hMainWnd = CreateWindow(L"D3DWndClassName", m_MainWndCaption.c_str(),
-        WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, width, height, 0, 0, m_hAppInst, 0);
+    m_hMainWnd = CreateWindow(
+        L"D3DWndClassName",
+        m_MainWndCaption.c_str(),
+        WS_OVERLAPPEDWINDOW,
+        CW_USEDEFAULT, CW_USEDEFAULT,
+        width, height,
+        nullptr, nullptr,
+        m_hAppInst,
+        nullptr);
+
+
+
+
     if (!m_hMainWnd)
     {
         MessageBox(0, L"CreateWindow Failed.", 0, 0);
@@ -370,7 +433,7 @@ bool D3DApp::InitDirect3D()
 
     // 创建D3D设备 和 D3D设备上下文
     UINT createDeviceFlags = 0;
-#if defined(DEBUG) || defined(_DEBUG)  
+#if defined(DEBUG) || defined(_DEBUG)
     createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
 #endif
     // 驱动类型数组
@@ -512,7 +575,7 @@ bool D3DApp::InitDirect3D()
         HR(dxgiFactory1->CreateSwapChain(m_pd3dDevice.Get(), &sd, m_pSwapChain.GetAddressOf()));
     }
 
-    
+
 
     // 可以禁止alt+enter全屏
     dxgiFactory1->MakeWindowAssociation(m_hMainWnd, DXGI_MWA_NO_ALT_ENTER | DXGI_MWA_NO_WINDOW_CHANGES);

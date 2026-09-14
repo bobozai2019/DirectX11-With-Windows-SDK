@@ -32,3 +32,5 @@ if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/Model)
 endif()
 
 add_subdirectory("Common")
+
+add_subdirectory("41 Godot Water Comparison")

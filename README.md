@@ -139,3 +139,7 @@ Project 31
   - 支持xmake生成项目(感谢Ligo)
 
 **[历史更新记录](MarkdownFiles/Updates/Updates.md)**
+
+## 新增示例：41 Godot Water Comparison
+
+[使用说明与着色器原理](Project%2019-/41%20Godot%20Water%20Comparison/README.md)：在 DX11 中并排展示 DynamicWaterDemo 正负波纹与 Godot 官方 Compute Texture 雨滴波纹，支持交互和自动验证。

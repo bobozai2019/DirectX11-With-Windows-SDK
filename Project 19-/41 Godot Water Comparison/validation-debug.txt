@@ -1,0 +1,12 @@
+PASS fragment RGBA8 12 CPU/GPU stencil steps, 19x19 dispatch, reset to 128
+PASS compute R32F 12 CPU/GPU stencil steps, 19x19 dispatch, reset to 128
+PASS hull entry/exit positive and negative waves
+Live dynamic: active=15771 Rmax=1 Gmax=0.909804
+Live compute: active=65013 Rmax=3 Gmax=0
+PASS 3 layouts, 3 display modes, pause and pointer injection
+PASS resize 128
+PASS resize 512
+PASS resize 256
+PASS swap-chain/depth resize 1024x768
+PASS D3D11 debug layer
+PASS rendered comparison screenshot and 240 frames

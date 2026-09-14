@@ -233,7 +233,7 @@ void BasicEffect::SetDrawBoltAnimNoDepthWrite(ID3D11DeviceContext * deviceContex
     deviceContext->PSSetShader(pImpl->m_pPixelShader3D.Get(), nullptr, 0);
     deviceContext->PSSetSamplers(0, 1, RenderStates::SSLinearWrap.GetAddressOf());
     deviceContext->OMSetDepthStencilState(RenderStates::DSSNoDepthWrite.Get(), 0);
-    deviceContext->OMSetBlendState(RenderStates::BSAdditive.Get(), nullptr, 0xFFFFFFFF);
+    deviceContext->OMSetBlendState(RenderStates::BSAlphaToCoverage.Get(), nullptr, 0xFFFFFFFF);
 }
 
 void BasicEffect::SetRenderNoDoubleBlend(ID3D11DeviceContext * deviceContext, UINT stencilRef)
@@ -281,7 +281,7 @@ void BasicEffect::SetRenderAlphaBlendWithStencil(ID3D11DeviceContext * deviceCon
     deviceContext->PSSetShader(pImpl->m_pPixelShader3D.Get(), nullptr, 0);
     deviceContext->PSSetSamplers(0, 1, RenderStates::SSLinearWrap.GetAddressOf());
     deviceContext->OMSetDepthStencilState(RenderStates::DSSDrawWithStencil.Get(), stencilRef);
-    deviceContext->OMSetBlendState(RenderStates::BSTransparent.Get(), nullptr, 0xFFFFFFFF);
+    deviceContext->OMSetBlendState(RenderStates::BSAlphaToCoverage.Get(), nullptr, 0xFFFFFFFF);
 }
 
 void BasicEffect::SetDrawBoltAnimNoDepthTestWithStencil(ID3D11DeviceContext * deviceContext, UINT stencilRef)
@@ -303,7 +303,7 @@ void BasicEffect::SetDrawBoltAnimNoDepthWriteWithStencil(ID3D11DeviceContext * d
     deviceContext->PSSetShader(pImpl->m_pPixelShader3D.Get(), nullptr, 0);
     deviceContext->PSSetSamplers(0, 1, RenderStates::SSLinearWrap.GetAddressOf());
     deviceContext->OMSetDepthStencilState(RenderStates::DSSNoDepthWriteWithStencil.Get(), stencilRef);
-    deviceContext->OMSetBlendState(RenderStates::BSAdditive.Get(), nullptr, 0xFFFFFFFF);
+    deviceContext->OMSetBlendState(RenderStates::BSAlphaToCoverage.Get(), nullptr, 0xFFFFFFFF);
 }
 
 void BasicEffect::Set2DRenderDefault(ID3D11DeviceContext * deviceContext)
