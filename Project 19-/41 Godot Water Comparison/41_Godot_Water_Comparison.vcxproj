@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64"><Configuration>Debug</Configuration><Platform>x64</Platform></ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64"><Configuration>Release</Configuration><Platform>x64</Platform></ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{C5E43409-DC30-5A69-B454-7E3C94983652}</ProjectGuid><Keyword>Win32Proj</Keyword><ProjectName>41_Godot_Water_Comparison</ProjectName>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType><PlatformToolset>$(DefaultPlatformToolset)</PlatformToolset><CharacterSet>Unicode</CharacterSet>
+    <UseDebugLibraries Condition="'$(Configuration)'=='Debug'">true</UseDebugLibraries>
+    <UseDebugLibraries Condition="'$(Configuration)'=='Release'">false</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <PropertyGroup>
+    <OutDir>$(ProjectDir)..\..\build\Project 19-\41 Godot Water Comparison\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)..\..\build\Project 19-\41 Godot Water Comparison\obj\$(Configuration)\</IntDir>
+    <TargetName>41 Godot Water Comparison</TargetName>
+    <LocalDebuggerWorkingDirectory>$(OutDir)</LocalDebuggerWorkingDirectory><DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Common;$(ProjectDir)..\..\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>UNICODE;_UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)'=='Debug'">_DEBUG;UNICODE;_UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard><AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <WarningLevel>Level3</WarningLevel><ExceptionHandling>Sync</ExceptionHandling><DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization Condition="'$(Configuration)'=='Debug'">Disabled</Optimization>
+      <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
+      <RuntimeLibrary Condition="'$(Configuration)'=='Debug'">MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)'=='Release'">MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link><SubSystem>Windows</SubSystem><GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>d3d11.lib;dxgi.lib;dxguid.lib;d3dcompiler.lib;winmm.lib;windowscodecs.lib;ole32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="GameApp.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="WaterSimulation.cpp" />
+    <ClInclude Include="GameApp.h" />
+    <ClInclude Include="WaterSimulation.h" />
+    <ClCompile Include="..\Common\d3dApp.cpp" />
+    <ClCompile Include="..\Common\CpuTimer.cpp" />
+    <ClCompile Include="..\Common\GpuTimer.cpp" />
+    <ClCompile Include="..\Common\DXTrace.cpp" />
+    <ClCompile Include="..\Common\ScreenGrab11.cpp" />
+    <ClCompile Include="..\Common\WICTextureLoader11.cpp" />
+    <ClCompile Include="..\..\ImGui\imgui.cpp" />
+    <ClCompile Include="..\..\ImGui\imgui_demo.cpp" />
+    <ClCompile Include="..\..\ImGui\imgui_draw.cpp" />
+    <ClCompile Include="..\..\ImGui\imgui_impl_dx11.cpp" />
+    <ClCompile Include="..\..\ImGui\imgui_impl_win32.cpp" />
+    <ClCompile Include="..\..\ImGui\imgui_tables.cpp" />
+    <ClCompile Include="..\..\ImGui\imgui_widgets.cpp" />
+    <None Include="Shaders\Collision_PS.hlsl" />
+    <None Include="Shaders\Compute_CS.hlsl" />
+    <None Include="Shaders\Dynamic_PS.hlsl" />
+    <None Include="Shaders\Fullscreen_VS.hlsl" />
+    <None Include="Shaders\Simulation.hlsli" />
+    <None Include="Shaders\Surface.hlsli" />
+    <None Include="Shaders\Water_PS.hlsl" />
+    <None Include="Shaders\Water_VS.hlsl" />
+    <None Include="README.md" />
+    <None Include="Build.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <WaterShaders Include="$(ProjectDir)Shaders\*.*" />
+    <WaterAssets Include="$(ProjectDir)Assets\*.*" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <Target Name="CopyWaterResources" AfterTargets="Build">
+    <MakeDir Directories="$(OutDir)Shaders;$(OutDir)Assets" />
+    <Copy SourceFiles="@(WaterShaders)" DestinationFolder="$(OutDir)Shaders" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(WaterAssets)" DestinationFolder="$(OutDir)Assets" SkipUnchangedFiles="true" />
+  </Target>
+</Project>

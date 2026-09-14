@@ -4,6 +4,14 @@
 
 ![运行画面](comparison.png)
 
+## 在原 build 解决方案中打开
+
+原有 `build/DirectX11 With Windows SDK.sln` 已补入 `Project 19- → 41_Godot_Water_Comparison`。VS 如果提示外部修改，请选择重新加载；也可关闭后重新打开此解决方案。
+
+右键第 41 项，选择“设为启动项目”，使用 Debug 或 Release、x64 构建运行。它引用本目录的原生 `41_Godot_Water_Comparison.vcxproj`，自动选用当前 VS 默认 C++ 工具集，源码与 CMake 目标共用，输出至 `build/Project 19-/41 Godot Water Comparison/<配置>`。
+
+该项目不依赖旧 build 中的 CMake ZERO_CHECK 或旧工具集库，可独立构建第 41 项。原解决方案备份为 `build/DirectX11 With Windows SDK.sln.before-water41.bak`。以后通过可用工具链重新生成整个 CMake 解决方案时，CMake 入口也已注册第 41 项。
+
 ## 构建与运行
 
 需要 Windows、支持 Feature Level 11.0 的显卡、Visual Studio C++ 桌面工具和 Windows SDK。运行不依赖 Godot，无需下载模型或 HDRI。

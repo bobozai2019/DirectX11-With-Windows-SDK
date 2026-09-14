@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"><ItemGroup>
+<Filter Include="Documentation"><UniqueIdentifier>{7B2C2B17-0442-5068-8450-386DDDB4FEBF}</UniqueIdentifier></Filter>
+<Filter Include="Framework"><UniqueIdentifier>{F76F1F03-1A48-5448-B119-63EDFB87A99B}</UniqueIdentifier></Filter>
+<Filter Include="Header Files"><UniqueIdentifier>{80BA852B-E42F-58BB-8DD9-956F71E4EE37}</UniqueIdentifier></Filter>
+<Filter Include="ImGui"><UniqueIdentifier>{2D32382C-0757-5D5B-913E-2A5C28BC1C57}</UniqueIdentifier></Filter>
+<Filter Include="Shaders"><UniqueIdentifier>{6ADC1860-D8F9-587B-ADAB-2E863FA7D93B}</UniqueIdentifier></Filter>
+<Filter Include="Source Files"><UniqueIdentifier>{AA1C7626-A2B6-5881-B31E-316DCF5E6555}</UniqueIdentifier></Filter>
+</ItemGroup><ItemGroup>
+<ClCompile Include="GameApp.cpp"><Filter>Source Files</Filter></ClCompile>
+<ClCompile Include="Main.cpp"><Filter>Source Files</Filter></ClCompile>
+<ClCompile Include="WaterSimulation.cpp"><Filter>Source Files</Filter></ClCompile>
+<ClInclude Include="GameApp.h"><Filter>Header Files</Filter></ClInclude>
+<ClInclude Include="WaterSimulation.h"><Filter>Header Files</Filter></ClInclude>
+<ClCompile Include="..\Common\d3dApp.cpp"><Filter>Framework</Filter></ClCompile>
+<ClCompile Include="..\Common\CpuTimer.cpp"><Filter>Framework</Filter></ClCompile>
+<ClCompile Include="..\Common\GpuTimer.cpp"><Filter>Framework</Filter></ClCompile>
+<ClCompile Include="..\Common\DXTrace.cpp"><Filter>Framework</Filter></ClCompile>
+<ClCompile Include="..\Common\ScreenGrab11.cpp"><Filter>Framework</Filter></ClCompile>
+<ClCompile Include="..\Common\WICTextureLoader11.cpp"><Filter>Framework</Filter></ClCompile>
+<ClCompile Include="..\..\ImGui\imgui.cpp"><Filter>ImGui</Filter></ClCompile>
+<ClCompile Include="..\..\ImGui\imgui_demo.cpp"><Filter>ImGui</Filter></ClCompile>
+<ClCompile Include="..\..\ImGui\imgui_draw.cpp"><Filter>ImGui</Filter></ClCompile>
+<ClCompile Include="..\..\ImGui\imgui_impl_dx11.cpp"><Filter>ImGui</Filter></ClCompile>
+<ClCompile Include="..\..\ImGui\imgui_impl_win32.cpp"><Filter>ImGui</Filter></ClCompile>
+<ClCompile Include="..\..\ImGui\imgui_tables.cpp"><Filter>ImGui</Filter></ClCompile>
+<ClCompile Include="..\..\ImGui\imgui_widgets.cpp"><Filter>ImGui</Filter></ClCompile>
+<None Include="Shaders\Collision_PS.hlsl"><Filter>Shaders</Filter></None>
+<None Include="Shaders\Compute_CS.hlsl"><Filter>Shaders</Filter></None>
+<None Include="Shaders\Dynamic_PS.hlsl"><Filter>Shaders</Filter></None>
+<None Include="Shaders\Fullscreen_VS.hlsl"><Filter>Shaders</Filter></None>
+<None Include="Shaders\Simulation.hlsli"><Filter>Shaders</Filter></None>
+<None Include="Shaders\Surface.hlsli"><Filter>Shaders</Filter></None>
+<None Include="Shaders\Water_PS.hlsl"><Filter>Shaders</Filter></None>
+<None Include="Shaders\Water_VS.hlsl"><Filter>Shaders</Filter></None>
+<None Include="README.md"><Filter>Documentation</Filter></None>
+<None Include="Build.ps1"><Filter>Documentation</Filter></None>
+</ItemGroup></Project>
