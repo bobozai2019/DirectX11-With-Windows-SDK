@@ -33,4 +33,5 @@ endif()
 
 add_subdirectory("Common")
 
-add_subdirectory("41 Godot Water Comparison")
+add_subdirectory("41 DynamicDraw Water")
+add_subdirectory("42 Compute Water")

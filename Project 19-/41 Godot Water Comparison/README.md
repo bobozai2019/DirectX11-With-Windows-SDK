@@ -1,10 +1,12 @@
 # 41 Godot Water Comparison / Godot 水波着色器对比
 
+> 当前主解决方案已拆分为 [DynamicDraw](../41%20DynamicDraw%20Water/README.md) 和 [Compute](../42%20Compute%20Water/README.md) 两个独立工程。以下为原对比工程的历史说明，可仍通过本目录 Build.ps1 独立构建。
+
 在一个 Direct3D 11 程序中展示 DynamicWaterDemo 与 Godot 官方 Compute Texture 的两种水波效果。
 
 ![运行画面](comparison.png)
 
-## 在原 build 解决方案中打开
+## 旧版工程说明
 
 原有 `build/DirectX11 With Windows SDK.sln` 已补入 `Project 19- → 41_Godot_Water_Comparison`。VS 如果提示外部修改，请选择重新加载；也可关闭后重新打开此解决方案。
 

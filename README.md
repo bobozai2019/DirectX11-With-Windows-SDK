@@ -140,6 +140,10 @@ Project 31
 
 **[历史更新记录](MarkdownFiles/Updates/Updates.md)**
 
-## 新增示例：41 Godot Water Comparison
+## 独立水波示例
 
-[使用说明与着色器原理](Project%2019-/41%20Godot%20Water%20Comparison/README.md)：在 DX11 中并排展示 DynamicWaterDemo 正负波纹与 Godot 官方 Compute Texture 雨滴波纹，支持交互和自动验证。
+- [41 DynamicDraw Water](Project%2019-/41%20DynamicDraw%20Water/README.md)：像素着色器水波、船体扰动、陆地遮罩与顶点位移。
+- [42 Compute Water](Project%2019-/42%20Compute%20Water/README.md)：计算着色器雨滴波纹与法线水面。
+
+两个工程均可通过各自的 `Build.ps1` 单独构建运行；根 CMake / xmake 已注册两个独立目标。
+原 [Godot Water Comparison](Project%2019-/41%20Godot%20Water%20Comparison/README.md) 保留供参考，不再默认加入根解决方案。
